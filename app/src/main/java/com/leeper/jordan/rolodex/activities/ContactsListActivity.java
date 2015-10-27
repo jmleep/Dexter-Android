@@ -1,5 +1,6 @@
 package com.leeper.jordan.rolodex.activities;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,8 @@ import com.leeper.jordan.rolodex.datasource.Contact;
 
 public class ContactsListActivity extends AppCompatActivity {
 
+    SQLiteDatabase contactsDB = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,8 @@ public class ContactsListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        contactsDB.openOrCreateDatabase("Contacts.db", null, null);
 
         RecyclerView contactsList = (RecyclerView) findViewById(R.id.my_recycler_view);
         ContactsRecyclerViewAdapter adapter = new ContactsRecyclerViewAdapter(Contact.createContactsList(60));
