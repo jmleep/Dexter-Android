@@ -9,13 +9,4 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_contacts_list" tools:context=".ContactsListActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/basic_margin"
-        android:paddingTop="@dimen/basic_margin"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </RelativeLayout>
