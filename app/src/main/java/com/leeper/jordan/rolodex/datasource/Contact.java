@@ -1,37 +1,56 @@
 package com.leeper.jordan.rolodex.datasource;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jordan on 10/26/2015.
+ * Basic class for each contact.  Parcelable in order to move a list of them between fragment and activity.
  */
-public class Contact {
-    private String mName;
-    private boolean mOnline;
+public class Contact implements Parcelable {
+    private String firstName;
+    private String lastName;
 
-    public Contact(String name, boolean online) {
-        mName = name;
-        mOnline = online;
+    public Contact(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getName() {
-        return mName;
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
     }
 
-    public boolean isOnline() {
-        return mOnline;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    private static int lastContactId = 0;
+    public Contact(Parcel in){
+        String[] data = new String[3];
 
-    public static List<Contact> createContactsList(int numContacts) {
-        List<Contact> contacts = new ArrayList<Contact>();
+        in.readStringArray(data);
+        this.firstName = data[0];
+        this.lastName = data[1];
+    }
 
-        for (int i = 1; i <= numContacts; i++) {
-            contacts.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[] {this.firstName,
+                this.lastName});
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Contact createFromParcel(Parcel in) {
+            return new Contact(in);
         }
 
-        return contacts;
-    }
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
 }

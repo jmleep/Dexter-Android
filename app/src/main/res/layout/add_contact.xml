@@ -7,8 +7,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/firstNameText"
+        android:layout_marginTop="50dp"
+        android:hint="First Name" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/lastNameText"
+        android:layout_marginTop="10dp"
+        android:hint="Last Name" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/createContact"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

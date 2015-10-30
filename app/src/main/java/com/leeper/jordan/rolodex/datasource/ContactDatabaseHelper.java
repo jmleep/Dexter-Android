@@ -1,12 +1,18 @@
 package com.leeper.jordan.rolodex.datasource;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jordan on 10/26/2015.
+ * Database helper to interact with SQLite Database.  Helper methods to retrieve list of contacts and to insert new contacts.
+ * TODO: Add delete
  */
 public class ContactDatabaseHelper extends SQLiteOpenHelper{
     SQLiteDatabase contactsDB = null;
@@ -23,6 +29,51 @@ public class ContactDatabaseHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void insertContact (String firstName, String lastName) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(ContactEntry.FIRST_NAME, firstName);
+        cv.put(ContactEntry.LAST_NAME, lastName);
+
+        long newRowId = db.insert(
+                ContactEntry.TABLE_NAME,
+                null,
+                cv
+        );
+    }
+
+    public ArrayList<Contact> getContacts (Context context) {
+        ArrayList<Contact> mContacts = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {
+                ContactDatabaseHelper.ContactEntry.CONTACT_ID,
+                ContactDatabaseHelper.ContactEntry.FIRST_NAME,
+                ContactDatabaseHelper.ContactEntry.LAST_NAME
+        };
+
+        Cursor c = db.query(
+                ContactDatabaseHelper.ContactEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            String firstName = c.getString(c.getColumnIndex(ContactDatabaseHelper.ContactEntry.FIRST_NAME));
+            String lasttName = c.getString(c.getColumnIndex(ContactDatabaseHelper.ContactEntry.LAST_NAME));
+            Contact contact = new Contact(firstName, lasttName);
+            mContacts.add(contact);
+        }
+
+        return mContacts;
     }
 
     public static abstract class ContactEntry implements BaseColumns {
