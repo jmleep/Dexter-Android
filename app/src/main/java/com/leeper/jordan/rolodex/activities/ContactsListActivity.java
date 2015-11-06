@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.fragments.AddContactFragment;
-import com.leeper.jordan.rolodex.fragments.ContactListFragment;
 
 public class ContactsListActivity extends AppCompatActivity {
 
@@ -22,18 +21,9 @@ public class ContactsListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO - Get list of contacts from DB here and put in Bundle
-        //ArrayList<Contact> contacts =  dbHelper.getContacts(getApplicationContext());
-
-        Bundle bundle = new Bundle();
-        //bundle.putParcelableArrayList("contacts", contacts);
-
-        ContactListFragment contactListFragment = new ContactListFragment();
-
-        contactListFragment.setArguments(bundle);
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, contactListFragment).commit();
+        //ContactListFragment contactListFragment = new ContactListFragment();
+        //contactListFragment.setArguments(bundle);
+        //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, contactListFragment).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
