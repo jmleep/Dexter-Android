@@ -1,6 +1,7 @@
 package com.leeper.jordan.rolodex.fragments;
 
 
+import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,22 +14,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leeper.jordan.rolodex.R;
+import com.leeper.jordan.rolodex.datasource.Contact;
+
+import java.util.List;
 
 /**
  * Created by jordan on 10/29/15.
  * This fragment should show the users existing list of contacts.
  */
-public class ContactListFragment extends Fragment {
+public class ContactsRecyclerViewFragment extends Fragment {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize dataset, this data would usually come from a local content provider or
+        // remote server.
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         ContactsRecyclerViewAdapter adapter = new ContactsRecyclerViewAdapter();
-
-        //TODO - Get list of contacts from activity here
-        Bundle bundle = getArguments();
-        //mContacts = bundle.getParcelableArrayList("contacts");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
