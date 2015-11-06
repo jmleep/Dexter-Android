@@ -13,10 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.leeper.jordan.rolodex.R;
-import com.leeper.jordan.rolodex.datasource.Contact;
-import com.leeper.jordan.rolodex.datasource.ContactDatabaseHelper;
-
-import java.util.List;
 
 /**
  * Created by jordan on 10/29/15.
@@ -24,16 +20,15 @@ import java.util.List;
  */
 public class ContactListFragment extends Fragment {
 
-    private static List<Contact> mContacts;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         ContactsRecyclerViewAdapter adapter = new ContactsRecyclerViewAdapter();
 
+        //TODO - Get list of contacts from activity here
         Bundle bundle = getArguments();
-        mContacts = bundle.getParcelableArrayList("contacts");
+        //mContacts = bundle.getParcelableArrayList("contacts");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -64,15 +59,19 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Contact contact = mContacts.get(position);
+            //TODO - Implement contacts here for each view
+            //Contact contact = mContacts.get(position);
 
             TextView textView = holder.name;
-            textView.setText(contact.getFirstName() + " " + contact.getLastName());
+            //textView.setText(contact.getFirstName() + " " + contact.getLastName());
         }
 
         @Override
         public int getItemCount() {
-            return mContacts.size();
+            //TODO - Return contact list size here
+            return 0;
         }
     }
+
+
 }

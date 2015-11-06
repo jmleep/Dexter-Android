@@ -5,23 +5,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.leeper.jordan.rolodex.R;
-import com.leeper.jordan.rolodex.datasource.Contact;
-import com.leeper.jordan.rolodex.datasource.ContactDatabaseHelper;
 import com.leeper.jordan.rolodex.fragments.AddContactFragment;
 import com.leeper.jordan.rolodex.fragments.ContactListFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ContactsListActivity extends AppCompatActivity {
-
-    private ContactDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +22,18 @@ public class ContactsListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayList<Contact> contacts =  dbHelper.getContacts(getApplicationContext());
+        //TODO - Get list of contacts from DB here and put in Bundle
+        //ArrayList<Contact> contacts =  dbHelper.getContacts(getApplicationContext());
 
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("contacts", contacts);
-        // However, if we're being restored from a previous state,
-        // then we don't need to do anything and should return or else
-        // we could end up with overlapping fragments.
+        //bundle.putParcelableArrayList("contacts", contacts);
 
-        // Create a new Fragment to be placed in the activity layout
         ContactListFragment contactListFragment = new ContactListFragment();
 
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
         contactListFragment.setArguments(bundle);
 
-        // Add the fragment to the 'fragment_container' FrameLayout
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, contactListFragment).commit();
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +44,6 @@ public class ContactsListActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.fragment_container, addContactFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                Log.i("tag", "Got into onclick");
             }
         });
     }
