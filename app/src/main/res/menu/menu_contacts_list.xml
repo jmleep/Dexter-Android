@@ -1,6 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".ContactsListActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:icon="@android:drawable/ic_menu_search"
+        android:id="@+id/searchRecords"
+        app:showAsAction="always"
+        android:orderInCategory="2"
+        android:title="@string/main_search_title"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:icon="@android:drawable/ic_menu_add"
+        android:id="@+id/addRecord"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+        android:title="@string/main_add_title"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/deleteDatabase"
+        app:showAsAction="never"
+        android:orderInCategory="3"
+        android:title="@string/main_delete_title"
+        tools:ignore="AppCompatResource" />
+
 </menu>

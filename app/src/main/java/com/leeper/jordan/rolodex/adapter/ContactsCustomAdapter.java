@@ -4,15 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.leeper.jordan.rolodex.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
+import com.leeper.jordan.rolodex.activities.EditActivity;
 import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
 
@@ -22,7 +25,7 @@ import java.util.List;
  * Created by Jordan on 11/5/2015.
  */
 public class ContactsCustomAdapter extends ArrayAdapter<Contact> {
-
+    private final String TAG = ContactsCustomAdapter.class.getSimpleName();
     private LayoutInflater mLayoutInflater;
     private static FragmentManager sFragmentManager;
 
@@ -51,7 +54,7 @@ public class ContactsCustomAdapter extends ArrayAdapter<Contact> {
         ((TextView) view.findViewById(R.id.contact_email)).setText(email);
         ((TextView) view.findViewById(R.id.contact_phone)).setText(phone);
 
-        Button edit = (Button) view.findViewById(R.id.edit);
+        ImageButton edit = (ImageButton) view.findViewById(R.id.edit);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +67,7 @@ public class ContactsCustomAdapter extends ArrayAdapter<Contact> {
             }
         });
 
-        Button delete = (Button) view.findViewById(R.id.delete);
+        ImageButton delete = (ImageButton) view.findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

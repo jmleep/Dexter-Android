@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Rolodex</string>
     <string name="action_settings">Settings</string>
+    <string name="main_search_title">Search</string>
+    <string name="main_add_title">Add</string>
+    <string name="main_delete_title">Delete Contacts</string>
+    <string name="edit_contact_name_hint">Full name</string>
+    <string name="edit_contact_email">Email Address</string>
+    <string name="edit_contact_phone">Phone Number</string>
+    <string name="save_contact_button">Save</string>
+    <string name="search_hint">Enter name</string>
+    <string name="add_contact_activity_title">Add Contact</string>
+    <string name="edit_contact_activity_title">Edit Contact</string>
+    <string name="search_contacts_activity_title">Search Contacts</string>
 </resources>

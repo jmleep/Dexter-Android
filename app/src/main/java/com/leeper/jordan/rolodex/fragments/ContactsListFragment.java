@@ -1,7 +1,6 @@
 package com.leeper.jordan.rolodex.fragments;
 
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -10,7 +9,7 @@ import android.support.v4.content.Loader;
 import com.leeper.jordan.rolodex.adapter.ContactsCustomAdapter;
 import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
-import com.leeper.jordan.rolodex.loader.ContactsListLoader;
+import com.leeper.jordan.rolodex.loaders.ContactsListLoader;
 
 import java.util.List;
 

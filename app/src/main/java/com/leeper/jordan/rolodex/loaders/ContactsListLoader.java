@@ -1,4 +1,4 @@
-package com.leeper.jordan.rolodex.loader;
+package com.leeper.jordan.rolodex.loaders;
 
 import android.content.ContentResolver;
 import android.content.Context;

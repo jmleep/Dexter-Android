@@ -68,7 +68,6 @@ public class ContactsProvider extends ContentProvider {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(ContactsDatabase.Tables.CONTACTS);
-
         switch (match) {
             case CONTACTS:
                 //do nothing
@@ -81,8 +80,9 @@ public class ContactsProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
 
+
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-        return null;
+        return cursor;
     }
 
     @Nullable
@@ -124,15 +124,13 @@ public class ContactsProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         Log.v(TAG, "delete(uri = " + uri);
 
-        if(uri.equals(ContactsContract.BASE_CONTENT_URI)) {
-            deleteDatabase();
-            return 0;
-        }
-
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
+            case CONTACTS:
+                deleteDatabase();
+                return 0;
             case CONTACTS_ID:
                 String id = ContactsContract.Contacts.getContactId(uri);
                 String selectionCriteria = BaseColumns._ID + "=" + id + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ")" : "");
