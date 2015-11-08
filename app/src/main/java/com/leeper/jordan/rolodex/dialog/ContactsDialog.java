@@ -1,4 +1,4 @@
-package com.leeper.jordan.rolodex;
+package com.leeper.jordan.rolodex.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,15 +11,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
 import com.leeper.jordan.rolodex.activities.ContactsListActivity;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
-
-import org.w3c.dom.Text;
-
-import static android.app.AlertDialog.*;
 
 /**
  * Created by Jordan on 11/8/2015.

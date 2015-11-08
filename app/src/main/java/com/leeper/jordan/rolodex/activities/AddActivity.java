@@ -12,11 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.leeper.jordan.rolodex.ContactsDialog;
+import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Jordan on 11/8/2015.

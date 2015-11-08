@@ -13,10 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.leeper.jordan.rolodex.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
 

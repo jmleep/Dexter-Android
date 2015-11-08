@@ -4,16 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.leeper.jordan.rolodex.ContactsDialog;
+import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.activities.EditActivity;
 import com.leeper.jordan.rolodex.datasource.Contact;
