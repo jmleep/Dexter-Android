@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#00B0FF</color>
+    <color name="contact_name">#FEFEFE</color>
+    <color name="contact_email">#BABABA</color>
+    <color name="contact_phone">#BABABA</color>
 </resources>
