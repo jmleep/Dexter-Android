@@ -16,46 +16,43 @@
 
         <TextView
             android:id="@+id/contact_name"
-            android:textSize="@dimen/contact_name"
-            android:textColor="@color/contact_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/contact_email"
-            android:textSize="@dimen/contact_email"
-            android:textColor="@color/contact_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/contact_phone"
-            android:textColor="@color/contact_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"/>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="right">
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="@drawable/background_state"/>
 
-            <Button
-                android:id="@+id/edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_edit"/>
-
-            <Button
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_delete"/>
-
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="@drawable/background_state"/>
 
     </LinearLayout>
+
 
 </LinearLayout>
