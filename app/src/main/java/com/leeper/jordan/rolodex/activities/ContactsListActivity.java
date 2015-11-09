@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
-import com.leeper.jordan.rolodex.fragments.ContactsListFragment;
+import com.leeper.jordan.rolodex.fragments.ContactsRecyclerViewFragment;
 
 public class ContactsListActivity extends AppCompatActivity {
 
@@ -23,15 +23,11 @@ public class ContactsListActivity extends AppCompatActivity {
 
         if(savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            ContactsListFragment contactsListFragment = new ContactsListFragment();
-            fragmentManager.beginTransaction().add(R.id.content_frame, contactsListFragment).commit();
+            ContactsRecyclerViewFragment contactsRecyclerViewFragment = new ContactsRecyclerViewFragment();
+            fragmentManager.beginTransaction().add(R.id.content_frame, contactsRecyclerViewFragment).commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //ContactListFragment contactListFragment = new ContactListFragment();
-        //contactListFragment.setArguments(bundle);
-        //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, contactListFragment).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

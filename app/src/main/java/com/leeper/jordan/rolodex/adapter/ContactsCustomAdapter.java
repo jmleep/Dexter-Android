@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,74 +21,97 @@ import com.leeper.jordan.rolodex.datasource.ContactsContract;
 import java.util.List;
 
 /**
- * Created by Jordan on 11/5/2015.
+ * Created by Jordan on 11/5/2015. Custom adapter for binding views to custom items.
  */
-public class ContactsCustomAdapter extends ArrayAdapter<Contact> {
+public class ContactsCustomAdapter extends RecyclerView.Adapter<ContactsCustomAdapter.ContactViewHolder> {
     private final String TAG = ContactsCustomAdapter.class.getSimpleName();
     private LayoutInflater mLayoutInflater;
     private static FragmentManager sFragmentManager;
+    private List<Contact> mContacts;
+    private Context mContext;
 
-    public ContactsCustomAdapter(Context context, FragmentManager fragmentManager) {
-        super(context, android.R.layout.simple_list_item_2);
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public ContactsCustomAdapter(Context context, FragmentManager fragmentManager, List<Contact> contacts) {
+
+        mLayoutInflater = LayoutInflater.from(context);
+        mContext = context;
+        mContacts = contacts;
         sFragmentManager = fragmentManager;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final View view;
-        if(convertView == null) {
-            view = mLayoutInflater.inflate(R.layout.custom_contact, parent, false);
-        }else {
-            view = convertView;
+    public static class ContactViewHolder extends RecyclerView.ViewHolder {
+
+        protected int v_id;
+        protected TextView vName;
+        protected TextView vEmail;
+        protected TextView vPhone;
+        protected ImageButton edit;
+        protected ImageButton delete;
+
+        public ContactViewHolder(View v) {
+            super(v);
+            vName = (TextView) v.findViewById(R.id.contact_name);
+            vEmail = (TextView) v.findViewById(R.id.contact_email);
+            vPhone = (TextView) v.findViewById(R.id.contact_phone);
+            edit = (ImageButton) v.findViewById(R.id.edit);
+            delete = (ImageButton) v.findViewById(R.id.delete);
         }
+    }
 
-        final Contact contact = getItem(position);
+    @Override
+    public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View contactView = mLayoutInflater.inflate(R.layout.custom_contact, parent, false);
+        return new ContactViewHolder(contactView);
+    }
+
+    @Override
+    public void onBindViewHolder(ContactViewHolder holder, int position) {
+        final Contact contact = mContacts.get(position);
         final int _id = contact.getId();
-        final String name = contact.getName();
-        final String email = contact.getEmail();
-        final String phone = contact.getPhone();
 
-        ((TextView) view.findViewById(R.id.contact_name)).setText(name);
-        ((TextView) view.findViewById(R.id.contact_email)).setText(email);
-        ((TextView) view.findViewById(R.id.contact_phone)).setText(phone);
+        holder.v_id = _id;
+        holder.vName.setText(contact.getName());
+        holder.vEmail.setText(contact.getEmail());
+        holder.vPhone.setText(contact.getPhone());
 
-        ImageButton edit = (ImageButton) view.findViewById(R.id.edit);
-        edit.setOnClickListener(new View.OnClickListener() {
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), EditActivity.class);
+                Intent intent = new Intent(mContext, EditActivity.class);
                 intent.putExtra(ContactsContract.ContactsColumns.CONTACT_ID, String.valueOf(_id));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_NAME, String.valueOf(name));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_EMAIL, String.valueOf(email));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_PHONE, String.valueOf(phone));
-                getContext().startActivity(intent);
+                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_NAME, String.valueOf(contact.getName()));
+                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_EMAIL, String.valueOf(contact.getEmail()));
+                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_PHONE, String.valueOf(contact.getPhone()));
+                mContext.startActivity(intent);
             }
         });
 
-        ImageButton delete = (ImageButton) view.findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContactsDialog dialog = new ContactsDialog();
                 Bundle args = new Bundle();
                 args.putString(ContactsDialog.DIALOG_TYPE, ContactsDialog.DELETE_RECORD);
                 args.putString(ContactsContract.ContactsColumns.CONTACT_ID, String.valueOf(_id));
-                args.putString(ContactsContract.ContactsColumns.CONTACT_NAME, name);
+                args.putString(ContactsContract.ContactsColumns.CONTACT_NAME, contact.getName());
                 dialog.setArguments(args);
                 dialog.show(sFragmentManager, "delete-record");
             }
         });
-
-        return view;
     }
 
-    public void setData(List<Contact> contactList) {
-        clear();
-        if(contactList != null) {
-            for(Contact contact: contactList) {
-                add(contact);
-            }
+    @Override
+    public int getItemCount() {
+        if(mContacts == null) {
+            return 0;
+        } else {
+            return mContacts.size();
         }
     }
+
+    public void setContacts(List<Contact> contacts) {
+        mContacts = contacts;
+    }
+
+
 }

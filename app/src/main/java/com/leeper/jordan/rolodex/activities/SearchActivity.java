@@ -19,7 +19,7 @@ import com.leeper.jordan.rolodex.loaders.ContactsSearchListLoader;
 import java.util.List;
 
 /**
- * Created by Jordan on 11/8/2015.
+ * Created by Jordan on 11/8/2015. Returns contacts where name matches search.
  */
 public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Contact>> {
 
@@ -41,8 +41,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
         mSearchEditText = (EditText) findViewById(R.id.searchName);
         mSearchButton = (Button) findViewById(R.id.searchButton);
         mContentResolver = getContentResolver();
-        contactsCustomAdapter = new ContactsCustomAdapter(SearchActivity.this, getSupportFragmentManager());
-        listView.setAdapter(contactsCustomAdapter);
+        //contactsCustomAdapter = new ContactsCustomAdapter(SearchActivity.this, getSupportFragmentManager());
+        //listView.setAdapter(contactsCustomAdapter);
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +60,12 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(Loader<List<Contact>> loader, List<Contact> data) {
-        contactsCustomAdapter.setData(data);
+        //contactsCustomAdapter.setData(data);
         this.contactsRetrieved = data;
     }
 
     @Override
     public void onLoaderReset(Loader<List<Contact>> loader) {
-        contactsCustomAdapter.setData(null);
+        //contactsCustomAdapter.setData(null);
     }
 }
