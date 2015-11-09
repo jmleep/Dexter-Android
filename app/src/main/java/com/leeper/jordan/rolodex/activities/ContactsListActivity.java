@@ -1,9 +1,11 @@
 package com.leeper.jordan.rolodex.activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import android.view.View;
 
 import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
+import com.leeper.jordan.rolodex.fragments.AddContactFragment;
 import com.leeper.jordan.rolodex.fragments.ContactsRecyclerViewFragment;
 
 public class ContactsListActivity extends AppCompatActivity {
@@ -21,8 +24,9 @@ public class ContactsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_list);
 
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         if(savedInstanceState == null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
+
             ContactsRecyclerViewFragment contactsRecyclerViewFragment = new ContactsRecyclerViewFragment();
             fragmentManager.beginTransaction().add(R.id.content_frame, contactsRecyclerViewFragment).commit();
         }
@@ -33,7 +37,11 @@ public class ContactsListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddContactFragment addContactFragment = new AddContactFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content_frame, addContactFragment);
+                transaction.addToBackStack("add-contact");
+                transaction.commit();
             }
         });
     }
@@ -51,10 +59,6 @@ public class ContactsListActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.addRecord:
-                Intent intent = new Intent(ContactsListActivity.this, AddActivity.class);
-                startActivity(intent);
-                break;
             case R.id.deleteDatabase:
                 ContactsDialog dialog = new ContactsDialog();
                 Bundle args = new Bundle();
