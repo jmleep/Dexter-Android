@@ -12,24 +12,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
+import com.leeper.jordan.rolodex.datasource.Contact;
+import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.fragments.AddContactFragment;
 import com.leeper.jordan.rolodex.fragments.ContactsRecyclerViewFragment;
+import com.leeper.jordan.rolodex.fragments.EditContactFragment;
 
-public class ContactsListActivity extends AppCompatActivity {
+public class ContactsListActivity extends AppCompatActivity implements ContactsRecyclerViewFragment.OnContactSelectedListener {
+
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_list);
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
         if(savedInstanceState == null) {
 
             ContactsRecyclerViewFragment contactsRecyclerViewFragment = new ContactsRecyclerViewFragment();
             fragmentManager.beginTransaction().add(R.id.content_frame, contactsRecyclerViewFragment).commit();
         }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,6 +48,23 @@ public class ContactsListActivity extends AppCompatActivity {
                 transaction.commit();
             }
         });
+    }
+
+    @Override
+    public void onContactSelected(Contact contact) {
+        if(contact != null) {
+            EditContactFragment editContactFragment = new EditContactFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("contactToEdit", contact);
+            editContactFragment.setArguments(bundle);
+
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.content_frame, editContactFragment);
+            transaction.addToBackStack("edit-contact");
+            transaction.commit();
+        }
+
     }
 
     @Override
