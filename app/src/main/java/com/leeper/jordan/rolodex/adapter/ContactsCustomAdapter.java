@@ -1,22 +1,19 @@
 package com.leeper.jordan.rolodex.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.R;
-import com.leeper.jordan.rolodex.activities.EditActivity;
 import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
+import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 
 import java.util.List;
 
@@ -73,18 +70,6 @@ public class ContactsCustomAdapter extends RecyclerView.Adapter<ContactsCustomAd
         holder.vName.setText(contact.getName());
         holder.vEmail.setText(contact.getEmail());
         holder.vPhone.setText(contact.getPhone());
-
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, EditActivity.class);
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_ID, String.valueOf(_id));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_NAME, String.valueOf(contact.getName()));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_EMAIL, String.valueOf(contact.getEmail()));
-                intent.putExtra(ContactsContract.ContactsColumns.CONTACT_PHONE, String.valueOf(contact.getPhone()));
-                mContext.startActivity(intent);
-            }
-        });
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
