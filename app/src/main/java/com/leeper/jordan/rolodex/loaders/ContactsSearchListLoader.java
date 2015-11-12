@@ -35,7 +35,7 @@ public class ContactsSearchListLoader extends AsyncTaskLoader<List<Contact>> {
         String[] projection = {BaseColumns._ID, ContactsContract.ContactsColumns.CONTACT_NAME, ContactsContract.ContactsColumns.CONTACT_EMAIL, ContactsContract.ContactsColumns.CONTACT_PHONE };
         List<Contact> entries = new ArrayList<Contact>();
 
-        String selection = ContactsContract.ContactsColumns.CONTACT_NAME + " LIKE '" + mFilterText + "%'";
+        String selection = ContactsContract.ContactsColumns.CONTACT_NAME + " LIKE '" + "%" + mFilterText + "%'";
         mCursor = mContentResolver.query(ContactsContract.URI_TABLE, projection, selection, null, null);
         if(mCursor != null) {
             if(mCursor.moveToFirst()) {
