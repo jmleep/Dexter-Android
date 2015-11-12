@@ -2,6 +2,7 @@ package com.leeper.jordan.rolodex.fragments;
 
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.adapter.ContactsCustomAdapter;
 import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
+import com.leeper.jordan.rolodex.listeners.RecyclerItemClickListener;
 import com.leeper.jordan.rolodex.loaders.ContactsListLoader;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class ContactsRecyclerViewFragment extends Fragment implements LoaderMana
     private ContactsCustomAdapter mAdapter;
     private List<Contact> mContacts;
     private static final int LOADER_ID = 1;
+    private OnContactSelectedListener mCallback;
 
     @Nullable
     @Override
@@ -36,12 +39,35 @@ public class ContactsRecyclerViewFragment extends Fragment implements LoaderMana
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         mAdapter = new ContactsCustomAdapter(getContext(), getFragmentManager(), mContacts);
 
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mCallback.onContactSelected(mContacts.get(position));
+            }
+        }));
+
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         getLoaderManager().initLoader(LOADER_ID, null, this);
         return recyclerView;
+    }
+
+    public interface OnContactSelectedListener {
+        public void onContactSelected(Contact contact);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mCallback = (OnContactSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement " + OnContactSelectedListener.class.getSimpleName());
+        }
+
     }
 
     @Override
