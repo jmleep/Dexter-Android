@@ -25,6 +25,10 @@
             android:name=".activities.SearchActivity"
             android:label="@string/search_contacts_activity_title"
             android:parentActivityName=".activities.ContactsListActivity" />
+        <activity
+            android:name=".activities.ContactDetailsActivity"
+            android:label="@string/contact_details_activity_title"
+            android:parentActivityName=".activities.ContactsListActivity" />
 
         <provider
             android:name="com.leeper.jordan.rolodex.datasource.ContactsProvider"

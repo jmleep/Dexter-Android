@@ -18,10 +18,8 @@
         android:id="@+id/searchButton"
         android:text="Search"/>
 
-    <ListView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchResultsList">
-
-    </ListView>
+        android:id="@+id/searchResultsContent" />
 </LinearLayout>

@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_layout);
-        listView = (ListView) findViewById(R.id.searchResultsList);
+        //listView = (ListView) findViewById(R.id.searchResultsList);
         mSearchEditText = (EditText) findViewById(R.id.searchName);
         mSearchButton = (Button) findViewById(R.id.searchButton);
         mContentResolver = getContentResolver();

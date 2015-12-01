@@ -12,4 +12,5 @@
     <string name="add_contact_activity_title">Add Contact</string>
     <string name="edit_contact_activity_title">Edit Contact</string>
     <string name="search_contacts_activity_title">Search Contacts</string>
+    <string name="contact_details_activity_title">Contact Details</string>
 </resources>

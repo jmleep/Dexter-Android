@@ -17,7 +17,6 @@ import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 import com.leeper.jordan.rolodex.fragments.AddContactFragment;
 import com.leeper.jordan.rolodex.fragments.ContactsRecyclerViewFragment;
-import com.leeper.jordan.rolodex.fragments.EditContactFragment;
 
 public class ContactsListActivity extends AppCompatActivity implements ContactsRecyclerViewFragment.OnContactSelectedListener {
 
@@ -53,16 +52,13 @@ public class ContactsListActivity extends AppCompatActivity implements ContactsR
     @Override
     public void onContactSelected(Contact contact) {
         if(contact != null) {
-            EditContactFragment editContactFragment = new EditContactFragment();
+            Intent intent = new Intent(this, ContactDetailsActivity.class);
 
             Bundle bundle = new Bundle();
-            bundle.putParcelable("contactToEdit", contact);
-            editContactFragment.setArguments(bundle);
+            bundle.putParcelable("contactToView", contact);
 
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.content_frame, editContactFragment);
-            transaction.addToBackStack("edit-contact");
-            transaction.commit();
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
 
     }
