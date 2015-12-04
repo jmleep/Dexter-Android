@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ContactsListActivity">
 
-    <TextView
+    <include layout="@layout/app_bar"/>
+
+    <FrameLayout
+        android:id="@+id/details_content_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contact_details_name"
-        android:paddingTop="25dp"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contact_details_phone"
-        android:paddingTop="25dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contact_details_email"
-        android:paddingTop="25dp"/>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
