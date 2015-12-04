@@ -35,14 +35,10 @@ public class ContactsCustomAdapter extends RecyclerView.Adapter<ContactsCustomAd
 
         protected int v_id;
         protected TextView vName;
-        protected TextView vEmail;
-        protected TextView vPhone;
 
         public ContactViewHolder(View v) {
             super(v);
             vName = (TextView) v.findViewById(R.id.contact_name);
-            vEmail = (TextView) v.findViewById(R.id.contact_email);
-            vPhone = (TextView) v.findViewById(R.id.contact_phone);
         }
     }
 
@@ -60,8 +56,7 @@ public class ContactsCustomAdapter extends RecyclerView.Adapter<ContactsCustomAd
 
         holder.v_id = _id;
         holder.vName.setText(contact.getName());
-        holder.vEmail.setText(contact.getEmail());
-        holder.vPhone.setText(contact.getPhone());
+
         /*
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
