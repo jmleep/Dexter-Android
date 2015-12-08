@@ -8,7 +8,7 @@
     <string name="edit_contact_email">Email Address</string>
     <string name="edit_contact_phone">Phone Number</string>
     <string name="save_contact_button">Save</string>
-    <string name="search_hint">Enter name</string>
+    <string name="search_hint">Search contacts</string>
     <string name="add_contact_activity_title">Add Contact</string>
     <string name="edit_contact_activity_title">Edit Contact</string>
     <string name="search_contacts_activity_title">Search Contacts</string>

@@ -6,4 +6,8 @@
     <color name="contact_name">#FEFEFE</color>
     <color name="contact_email">#BABABA</color>
     <color name="contact_phone">#BABABA</color>
+    <color name="phoneButton">#00BFFF</color>
+    <color name="searchButton">#FFFFFF</color>
+    <color name="textButton">#0ca50c</color>
+    <color name="emailButton">#e50f0f</color>
 </resources>
