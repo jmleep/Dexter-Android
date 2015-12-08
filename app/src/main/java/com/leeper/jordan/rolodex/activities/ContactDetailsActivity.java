@@ -19,7 +19,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_details);
+        setContentView(R.layout.activity_generic);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,7 +31,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         ContactDetailsFragment contactDetailsFragment = new ContactDetailsFragment();
         contactDetailsFragment.setArguments(bundle);
 
-        fragmentManager.beginTransaction().add(R.id.details_content_frame, contactDetailsFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.content_frame, contactDetailsFragment).commit();
 
     }
 }

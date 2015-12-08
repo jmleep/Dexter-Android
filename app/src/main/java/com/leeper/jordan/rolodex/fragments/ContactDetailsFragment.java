@@ -45,20 +45,20 @@ public class ContactDetailsFragment extends Fragment {
         if(null != contactToView.getPhone()) {
             textMessageButton = new ImageButton(getActivity());
             textMessageButton.setBackground(null);
-            textMessageButton.setImageResource(R.drawable.ic_chat_black_24dp);
+            textMessageButton.setImageResource(R.drawable.ic_chat_tinted);
 
             phoneCallButton = new ImageButton(getActivity());
             phoneCallButton.setBackground(null);
-            phoneCallButton.setImageResource(R.drawable.ic_call_black_24dp);
+            phoneCallButton.setImageResource(R.drawable.ic_call_tinted);
 
-            linearLayout.addView(textMessageButton, params);
             linearLayout.addView(phoneCallButton, params);
+            linearLayout.addView(textMessageButton, params);
         }
 
         if(null != contactToView.getEmail()) {
             emailButton = new ImageButton(getActivity());
             emailButton.setBackground(null);
-            emailButton.setImageResource(R.drawable.ic_email_black_24dp);
+            emailButton.setImageResource(R.drawable.ic_email_tinted);
 
             linearLayout.addView(emailButton, params);
         }
@@ -81,7 +81,7 @@ public class ContactDetailsFragment extends Fragment {
             }
         });
 
-        phoneCallButton.setOnClickListener(new View.OnClickListener() {
+        emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Email", Toast.LENGTH_SHORT).show();

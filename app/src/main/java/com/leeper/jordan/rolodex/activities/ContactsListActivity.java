@@ -1,16 +1,24 @@
 package com.leeper.jordan.rolodex.activities;
 
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.datasource.Contact;
@@ -21,6 +29,7 @@ import com.leeper.jordan.rolodex.fragments.ContactsRecyclerViewFragment;
 public class ContactsListActivity extends AppCompatActivity implements ContactsRecyclerViewFragment.OnContactSelectedListener {
 
     private final FragmentManager fragmentManager = getSupportFragmentManager();
+    private final static int LIST_LOADER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +38,12 @@ public class ContactsListActivity extends AppCompatActivity implements ContactsR
 
         if(savedInstanceState == null) {
 
+            Bundle bundle = new Bundle();
+            bundle.putInt("loaderId", LIST_LOADER);
+
             ContactsRecyclerViewFragment contactsRecyclerViewFragment = new ContactsRecyclerViewFragment();
+            contactsRecyclerViewFragment.setArguments(bundle);
+
             fragmentManager.beginTransaction().add(R.id.content_frame, contactsRecyclerViewFragment).commit();
         }
 
@@ -65,8 +79,21 @@ public class ContactsListActivity extends AppCompatActivity implements ContactsR
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_contacts_list, menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if(null != searchManager ) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(getApplicationContext(), SearchActivity.class)));
+        }
+        searchView.setIconifiedByDefault(false);
+
+        ((EditText)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(Color.WHITE);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -83,9 +110,6 @@ public class ContactsListActivity extends AppCompatActivity implements ContactsR
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "delete-database");
                 break;
-            case R.id.searchRecords:
-                Intent searchIntent = new Intent(ContactsListActivity.this, SearchActivity.class);
-                startActivity(searchIntent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.leeper.jordan.rolodex.datasource.Contact;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
 import com.leeper.jordan.rolodex.listeners.RecyclerItemClickListener;
 import com.leeper.jordan.rolodex.loaders.ContactsListLoader;
+import com.leeper.jordan.rolodex.loaders.ContactsSearchListLoader;
 
 import java.util.List;
 
@@ -30,8 +32,22 @@ public class ContactsRecyclerViewFragment extends Fragment implements LoaderMana
     private ContentResolver mContentResolver;
     private ContactsCustomAdapter mAdapter;
     private List<Contact> mContacts;
-    private static final int LOADER_ID = 1;
+    private int mLoaderId;
     private OnContactSelectedListener mCallback;
+    private String mMatchText;
+    private static final String TAG = ContactsRecyclerViewFragment.class.getSimpleName();
+    private static final int LIST_LOADER = 1;
+    private static final int SEARCH_LOADER = 2;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mLoaderId = (int) getArguments().get("loaderId");
+        if(mLoaderId == SEARCH_LOADER) {
+            mMatchText = (String) getArguments().get("query");
+        }
+    }
 
     @Nullable
     @Override
@@ -50,7 +66,7 @@ public class ContactsRecyclerViewFragment extends Fragment implements LoaderMana
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+        getLoaderManager().initLoader(mLoaderId, null, this);
         return recyclerView;
     }
 
@@ -79,7 +95,16 @@ public class ContactsRecyclerViewFragment extends Fragment implements LoaderMana
     @Override
     public Loader<List<Contact>> onCreateLoader(int id, Bundle args) {
         mContentResolver = getActivity().getContentResolver();
-        return new ContactsListLoader(getActivity(), ContactsContract.URI_TABLE, mContentResolver);
+
+        if (mLoaderId == LIST_LOADER) {
+            return new ContactsListLoader(getActivity(), ContactsContract.URI_TABLE, mContentResolver);
+        } else if(mLoaderId == SEARCH_LOADER) {
+            return new ContactsSearchListLoader(getActivity(), ContactsContract.URI_TABLE, this.mContentResolver, mMatchText);
+        } else {
+            Log.e(TAG, "Invalid loader was passed");
+            return null;
+        }
+
     }
 
     @Override
