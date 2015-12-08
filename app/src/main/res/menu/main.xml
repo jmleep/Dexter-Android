@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".ContactsListActivity">
 
     <item
-        android:icon="@drawable/search_24"
-        android:id="@+id/searchRecords"
-        app:showAsAction="always"
-        android:orderInCategory="2"
-        android:title="@string/main_search_title"
-        tools:ignore="AppCompatResource" />
+        android:id="@+id/menu_item_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_search_white_tinted"
+        app:showAsAction="collapseActionView|ifRoom"
+        android:title="Search" />
 
     <item
         android:id="@+id/deleteDatabase"
