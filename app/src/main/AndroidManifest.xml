@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.leeper.jordan.rolodex">
+    package="com.leeper.jordan.dexter">
 
-    <permission android:name="com.leeper.jordan.rolodex.provider.READWRITE" />
+    <permission android:name="com.leeper.jordan.dexter.provider.READWRITE" />
     <uses-permission android:name="com.leeper.jordan.rolodex.provider.READWRITE" />
 
     <application
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.ContactsListActivity"
+            android:name="com.leeper.jordan.dexter.activities.ContactsListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SearchActivity"
+        <activity android:name="com.leeper.jordan.dexter.activities.SearchActivity"
             android:label="@string/search_contacts_activity_title"
-            android:parentActivityName=".activities.ContactsListActivity">
+            android:parentActivityName="com.leeper.jordan.dexter.activities.ContactsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -34,14 +34,14 @@
         </activity>
 
         <activity
-            android:name=".activities.ContactDetailsActivity"
+            android:name="com.leeper.jordan.dexter.activities.ContactDetailsActivity"
             android:label="@string/contact_details_activity_title"
-            android:parentActivityName=".activities.ContactsListActivity"
+            android:parentActivityName="com.leeper.jordan.dexter.activities.ContactsListActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <provider
-            android:name="com.leeper.jordan.rolodex.datasource.ContactsProvider"
-            android:authorities="com.leeper.jordan.rolodex.provider"
+            android:name="com.leeper.jordan.dexter.datasource.ContactsProvider"
+            android:authorities="com.leeper.jordan.dexter.provider"
             android:exported="true"
             android:readPermission="com.leeper.jordan.rolodex.provider.READWRITE"
             android:writePermission="com.leeper.jordan.rolodex.provider.READWRITE" />
