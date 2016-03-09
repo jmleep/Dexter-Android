@@ -11,9 +11,11 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.leeper.jordan.rolodex.R;
 import com.leeper.jordan.rolodex.activities.ContactsListActivity;
 import com.leeper.jordan.rolodex.datasource.ContactsContract;
 import com.leeper.jordan.rolodex.dialog.ContactsDialog;
+import com.leeper.jordan.rolodex.validator.ContactDetailsValidator;
 
 /**
  * Created by Jordan on 11/8/2015.
@@ -28,8 +31,13 @@ import com.leeper.jordan.rolodex.dialog.ContactsDialog;
 public class AddContactFragment extends Fragment {
     private final String TAG = AddContactFragment.class.getSimpleName();
     private EditText mNameTextView, mEmailTextView, mPhoneTextView;
-    private Button mButton;
     private ContentResolver mContentResolver;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -42,26 +50,6 @@ public class AddContactFragment extends Fragment {
         mNameTextView = (EditText) view.findViewById(R.id.editContactName);
         mEmailTextView = (EditText) view.findViewById(R.id.editContactEmail);
         mPhoneTextView = (EditText) view.findViewById(R.id.editContactPhone);
-
-        mButton = (Button) view.findViewById(R.id.saveContactButton);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isValid()) {
-                    ContentValues values = new ContentValues();
-                    values.put(ContactsContract.ContactsColumns.CONTACT_NAME, mNameTextView.getText().toString());
-                    values.put(ContactsContract.ContactsColumns.CONTACT_EMAIL, mEmailTextView.getText().toString());
-                    values.put(ContactsContract.ContactsColumns.CONTACT_PHONE, mPhoneTextView.getText().toString());
-                    Uri returned = mContentResolver.insert(ContactsContract.URI_TABLE, values);
-                    Log.d(TAG, "Record id: " + returned.toString());
-                    Intent intent = new Intent(getActivity(), ContactsListActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Please ensure you have entered valid data.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -84,14 +72,6 @@ public class AddContactFragment extends Fragment {
         return view;
     }
 
-    private boolean isValid() {
-        if(mNameTextView.getText().toString().length() == 0 || mPhoneTextView.getText().toString().length() == 0 || mEmailTextView.getText().toString().length() == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private boolean someDataEntered() {
         if(mNameTextView.getText().toString().length() > 0 || mPhoneTextView.getText().toString().length() > 0 || mEmailTextView.getText().toString().length() > 0) {
             return true;
@@ -100,5 +80,35 @@ public class AddContactFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.add_edit_contact, menu);
 
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.doneEditingButton:
+                if (ContactDetailsValidator.validateContactDetails(mNameTextView.getText().toString(), mPhoneTextView.getText().toString(),
+                        mEmailTextView.getText().toString())) {
+                    ContentValues values = new ContentValues();
+                    values.put(ContactsContract.ContactsColumns.CONTACT_NAME, mNameTextView.getText().toString());
+                    values.put(ContactsContract.ContactsColumns.CONTACT_EMAIL, mEmailTextView.getText().toString());
+                    values.put(ContactsContract.ContactsColumns.CONTACT_PHONE, mPhoneTextView.getText().toString());
+                    Uri returned = mContentResolver.insert(ContactsContract.URI_TABLE, values);
+                    Log.d(TAG, "Record id: " + returned.toString());
+                    Intent intent = new Intent(getActivity(), ContactsListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please ensure you have entered valid data.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

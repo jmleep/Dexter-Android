@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/editContactButton"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_mode_edit_tinted"
+        android:title="@string/contact_detail_menu_edit_button_title" />
+
+    <item android:id="@+id/deleteContactButton"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_delete_tinted"
+        android:title="@string/contact_detail_menu_delete_button_title" />
 </menu>

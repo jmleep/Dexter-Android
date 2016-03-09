@@ -16,4 +16,8 @@
     <string name="contact_details_name_title">Name:</string>
     <string name="contact_details_phone_title">Phone:</string>
     <string name="contact_details_email_title">Email:</string>
+    <string name="main_menu_button_search_title">Search</string>
+    <string name="contact_detail_menu_edit_button_title">Edit</string>
+    <string name="contact_detail_menu_delete_button_title">Delete</string>
+    <string name="edit_menu_done_button_title">Done</string>
 </resources>

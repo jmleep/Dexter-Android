@@ -7,12 +7,13 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@drawable/ic_search_white_tinted"
         app:showAsAction="collapseActionView|ifRoom"
-        android:title="Search" />
+        android:title="@string/main_menu_button_search_title"
+        android:orderInCategory="3"/>
 
     <item
         android:id="@+id/deleteDatabase"
         app:showAsAction="never"
-        android:orderInCategory="3"
+        android:orderInCategory="10"
         android:title="@string/main_delete_title"
         tools:ignore="AppCompatResource" />
 

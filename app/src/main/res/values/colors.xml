@@ -10,4 +10,7 @@
     <color name="searchButton">#FFFFFF</color>
     <color name="textButton">#0ca50c</color>
     <color name="emailButton">#e50f0f</color>
+    <color name="deleteButton">#FFFFFF</color>
+    <color name="editButton">#FFFFFF</color>
+    <color name="doneButton">#FFFFFF</color>
 </resources>

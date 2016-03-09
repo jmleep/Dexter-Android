@@ -4,29 +4,77 @@
     android:layout_height="match_parent"
     android:padding="17dp">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editContactName"
-        android:hint="@string/edit_contact_name_hint"/>
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editContactEmail"
-        android:hint="@string/edit_contact_email"
-        android:inputType="textEmailAddress"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_details_name_title"
+            android:textSize="20dp"
+            android:paddingRight="7dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editContactPhone"
-        android:hint="@string/edit_contact_phone"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editContactName"
+            android:textSize="20dp"
+            android:hint="@string/edit_contact_name_hint"/>
 
-    <Button
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveContactButton"
-        android:text="@string/save_contact_button"/>
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_details_phone_title"
+            android:textSize="20dp"
+            android:paddingRight="5dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editContactPhone"
+            android:hint="@string/edit_contact_phone"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_details_email_title"
+            android:textSize="20dp"
+            android:paddingRight="11dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editContactEmail"
+            android:hint="@string/edit_contact_email"
+            android:inputType="textEmailAddress"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
